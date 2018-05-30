@@ -4,18 +4,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="10dp"
     tools:context="com.xpf.ch340_host.MainActivity">
 
-    <EditText
-        android:id="@+id/etContent"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:hint="Input need send data" />
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/etContent"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:hint="Input need send data" />
+
+        <Button
+            android:id="@+id/btnFormat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ascii" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnSend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@color/colorPrimary"
         android:padding="10dp"
         android:text="Send"

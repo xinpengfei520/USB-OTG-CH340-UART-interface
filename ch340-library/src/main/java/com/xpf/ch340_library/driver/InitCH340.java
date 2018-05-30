@@ -57,7 +57,9 @@ public class InitCH340 {
         mUsbManager = (UsbManager) appContext.getSystemService(Context.USB_SERVICE);
         if (mUsbManager != null) {
             HashMap<String, UsbDevice> deviceHashMap = mUsbManager.getDeviceList();
+            InLog.e(TAG, "deviceHashMap.size()=" + deviceHashMap.size());
             for (UsbDevice device : deviceHashMap.values()) {
+                InLog.i(TAG, "ProductId:" + device.getProductId() + ",VendorId:" + device.getVendorId());
                 if (device.getProductId() == 29987 && device.getVendorId() == 6790) {
                     mUsbDevice = device;
                     if (mUsbManager.hasPermission(device)) {
@@ -120,14 +122,15 @@ public class InitCH340 {
      * 配置串口波特率，函数说明可参照编程手册
      */
     private static void configParameters() {
-        if (driver.SetConfig(baudRate, dataBit, stopBit, parity, flowControl)) {
-            InLog.d(TAG, "Successful serial port Settings！");
+        boolean isSetConfig = driver.SetConfig(baudRate, dataBit, stopBit, parity, flowControl);
+        if (isSetConfig) {
+            InLog.i(TAG, "Serial port Settings success~");
             if (readDataRunnable == null) {
                 readDataRunnable = new ReadDataRunnable();
             }
             mThreadPool.execute(readDataRunnable);
         } else {
-            InLog.d(TAG, "Serial port Settings failed！");
+            InLog.e(TAG, "Serial port Settings failed！");
         }
     }
 

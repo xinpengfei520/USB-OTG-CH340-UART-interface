@@ -12,17 +12,26 @@ import com.xpf.ch340_library.logger.InLog;
 
 public class CH340Util {
 
+    private static final String TAG = CH340Util.class.getSimpleName();
+
     /**
      * write data in ch340.
      *
      * @param byteArray 字节数组
+     * @param format
      * @return 返回写入的结果，-1表示写入失败！
      */
-    public static int writeData(@NonNull byte[] byteArray) {
+    public static int writeData(@NonNull byte[] byteArray, String format) {
         // 将此处收到的数组转化为HexString
         String hexString = bytesToHexString(byteArray, byteArray.length);
-        InLog.i("TAG", "WriteHexString===" + hexString);
-        return InitCH340.getDriver().WriteData(byteArray, byteArray.length);
+        InLog.i(TAG, "WriteHexString===" + hexString);
+        if ("ascii".equals(format)) {
+            return InitCH340.getDriver().WriteData(byteArray, byteArray.length);
+        } else if ("hex".equals(format)) {
+            return InitCH340.getDriver().WriteData(hexString.getBytes(), byteArray.length);
+        } else {
+            return -1;
+        }
     }
 
     /**

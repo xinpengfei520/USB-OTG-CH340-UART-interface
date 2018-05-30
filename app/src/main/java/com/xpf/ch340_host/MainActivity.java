@@ -22,7 +22,7 @@ import com.xpf.ch340_library.utils.CH340Util;
 public class MainActivity extends AppCompatActivity implements InitCH340.IUsbPermissionListener {
 
     private boolean isFirst;//判断是否打开
-    private Button btnSend;
+    private Button btnSend, btnFormat;
     private EditText etContent;
     private static final String ACTION_USB_PERMISSION = "com.linc.USB_PERMISSION";
 
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements InitCH340.IUsbPer
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btnSend = findViewById(R.id.btnSend);
+        btnFormat = findViewById(R.id.btnFormat);
         etContent = findViewById(R.id.etContent);
         initData();
         initListener();
@@ -43,12 +44,24 @@ public class MainActivity extends AppCompatActivity implements InitCH340.IUsbPer
                 sendData();
             }
         });
+        btnFormat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String format = btnFormat.getText().toString().toLowerCase();
+                if ("ascii".equals(format)) {
+                    btnFormat.setText("hex");
+                } else if ("hex".equals(format)) {
+                    btnFormat.setText("ascii");
+                }
+            }
+        });
     }
 
     private void sendData() {
         String string = etContent.getText().toString();
         if (!TextUtils.isEmpty(string)) {
-            CH340Util.writeData(string.getBytes());
+            String format = btnFormat.getText().toString().toLowerCase();
+            CH340Util.writeData(string.getBytes(), format);
         } else {
             Toast.makeText(MainActivity.this, "发送的数据不能为空！", Toast.LENGTH_SHORT).show();
         }
@@ -58,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements InitCH340.IUsbPer
         InitCH340.setListener(this);
         if (!isFirst) {
             isFirst = true;
-            // 初始化室内机模块
+            // 初始化 ch340-library
             CH340Master.initialize(MyApplication.getContext());
         }
     }
