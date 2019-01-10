@@ -8,9 +8,8 @@ import com.xpf.ch340_library.driver.InitCH340;
 
 /**
  * Created by xpf on 2018/1/19 :)
- * Function:CH340Master全局初始化类
+ * Function:CH340Master 全局初始化类
  */
-
 public class CH340Master extends Application {
 
     /**
@@ -53,9 +52,9 @@ public class CH340Master extends Application {
      *
      * @return Application context.
      */
-    public static Context getContext() {
+    public static Context getAppContext() {
         if (sContext == null) {
-            throw new RuntimeException(APPLICATION_CONTEXT_IS_NULL);
+            throw new NullPointerException(APPLICATION_CONTEXT_IS_NULL);
         }
         return sContext;
     }

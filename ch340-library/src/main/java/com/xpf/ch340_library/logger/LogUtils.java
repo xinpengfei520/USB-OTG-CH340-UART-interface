@@ -2,16 +2,17 @@ package com.xpf.ch340_library.logger;
 
 import android.util.Log;
 
+import com.xpf.ch340_library.BuildConfig;
+
 /**
  * Created by xpf on 2017/9/22 :)
- * Function:Anloq Indoor logger.
+ * Function:LogUtils 工具类.
  */
+public class LogUtils {
 
-public class InLog {
+    private static boolean mDebug = BuildConfig.DEBUG;// default open log print.
 
-    private static boolean mDebug = true;// default open log print.
-
-    private InLog() {
+    private LogUtils() {
     }
 
     public static void isDebug(boolean isDebug) {
@@ -23,7 +24,6 @@ public class InLog {
             Log.e(TAG, message);
         }
     }
-
 
     public static void i(String TAG, String message) {
         if (mDebug) {

@@ -1,17 +1,16 @@
 package com.xpf.ch340_library.runnable;
 
 import com.xpf.ch340_library.driver.InitCH340;
-import com.xpf.ch340_library.logger.InLog;
+import com.xpf.ch340_library.logger.LogUtils;
 import com.xpf.ch340_library.utils.CH340Util;
 
 /**
  * Created by xpf on 2017/12/20.
  * Function:ReadDataRunnable
  */
-
 public class ReadDataRunnable implements Runnable {
 
-    private String TAG = ReadDataRunnable.class.getSimpleName();
+    private static final String TAG = "ReadDataRunnable";
     private boolean mStop = false; // 是否停止线程
 
     @Override
@@ -30,12 +29,12 @@ public class ReadDataRunnable implements Runnable {
 
             switch (length) {
                 case 0: // 无数据
-                    InLog.i(TAG, "No data~");
+                    LogUtils.i(TAG, "No data~");
                     break;
                 default: // 有数据时的处理
                     // 将此处收到的数组转化为HexString
                     String hexString = CH340Util.bytesToHexString(receiveBuffer, length);
-                    InLog.i(TAG, "ReadHexString===" + hexString + ",length===" + length);
+                    LogUtils.i(TAG, "ReadHexString===" + hexString + ",length===" + length);
                     break;
             }
 

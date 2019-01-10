@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements InitCH340.IUsbPer
     public void result(boolean isGranted) {
         if (!isGranted) {
             PendingIntent mPermissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), 0);
-            InitCH340.getmUsbManager().requestPermission(InitCH340.getmUsbDevice(), mPermissionIntent);
+            InitCH340.getmUsbManager().requestPermission(InitCH340.getUsbDevice(), mPermissionIntent);
         }
     }
 

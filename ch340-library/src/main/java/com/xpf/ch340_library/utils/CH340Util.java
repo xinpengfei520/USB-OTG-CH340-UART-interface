@@ -3,28 +3,31 @@ package com.xpf.ch340_library.utils;
 import android.support.annotation.NonNull;
 
 import com.xpf.ch340_library.driver.InitCH340;
-import com.xpf.ch340_library.logger.InLog;
+import com.xpf.ch340_library.logger.LogUtils;
 
 /**
  * Created by xpf on 2018/2/6 :)
- * Function:CH340数据处理工具类
+ * Function:CH340 数据处理工具类
  */
-
 public class CH340Util {
 
-    private static final String TAG = CH340Util.class.getSimpleName();
+    private static final String TAG = "CH340Util";
+
+    enum DataFormat {
+        ASCII, HEX
+    }
 
     /**
      * write data in ch340.
      *
      * @param byteArray 字节数组
-     * @param format
-     * @return 返回写入的结果，-1表示写入失败！
+     * @param format    写入数据的格式
+     * @return 返回写入的结果，-1 表示写入失败！
      */
     public static int writeData(@NonNull byte[] byteArray, String format) {
-        // 将此处收到的数组转化为HexString
+        // 将此处收到的数组转化为 HexString
         String hexString = bytesToHexString(byteArray, byteArray.length);
-        InLog.i(TAG, "WriteHexString===" + hexString);
+        LogUtils.i(TAG, "WriteHexString===" + hexString);
         if ("ascii".equals(format)) {
             return InitCH340.getDriver().WriteData(byteArray, byteArray.length);
         } else if ("hex".equals(format)) {

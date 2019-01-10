@@ -5,7 +5,7 @@ import android.content.Context;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
 
-import com.xpf.ch340_library.logger.InLog;
+import com.xpf.ch340_library.logger.LogUtils;
 import com.xpf.ch340_library.runnable.ReadDataRunnable;
 
 import java.util.HashMap;
@@ -17,9 +17,8 @@ import cn.wch.ch34xuartdriver.CH34xUARTDriver;
 
 /**
  * Created by xpf on 2017/11/22.
- * Function:初始化ch340驱动
+ * Function:初始化 ch340 驱动
  */
-
 public class InitCH340 {
 
     private static final String TAG = InitCH340.class.getSimpleName();
@@ -38,7 +37,7 @@ public class InitCH340 {
     private static IUsbPermissionListener listener;
     private static UsbDevice mUsbDevice;
 
-    public static UsbDevice getmUsbDevice() {
+    public static UsbDevice getUsbDevice() {
         return mUsbDevice;
     }
 
@@ -57,9 +56,9 @@ public class InitCH340 {
         mUsbManager = (UsbManager) appContext.getSystemService(Context.USB_SERVICE);
         if (mUsbManager != null) {
             HashMap<String, UsbDevice> deviceHashMap = mUsbManager.getDeviceList();
-            InLog.e(TAG, "deviceHashMap.size()=" + deviceHashMap.size());
+            LogUtils.e(TAG, "deviceHashMap.size()=" + deviceHashMap.size());
             for (UsbDevice device : deviceHashMap.values()) {
-                InLog.i(TAG, "ProductId:" + device.getProductId() + ",VendorId:" + device.getVendorId());
+                LogUtils.i(TAG, "ProductId:" + device.getProductId() + ",VendorId:" + device.getVendorId());
                 if (device.getProductId() == 29987 && device.getVendorId() == 6790) {
                     mUsbDevice = device;
                     if (mUsbManager.hasPermission(device)) {
@@ -85,7 +84,7 @@ public class InitCH340 {
         driver = new CH34xUARTDriver(usbManager, appContext, ACTION_USB_PERMISSION);
         // 判断系统是否支持USB HOST
         if (!driver.UsbFeatureSupported()) {
-            InLog.e(TAG, "Your mobile phone does not support USB HOST, please change other phones to try again!");
+            LogUtils.e(TAG, "Your mobile phone does not support USB HOST, please change other phones to try again!");
         } else {
             openCH340();
         }
@@ -96,24 +95,24 @@ public class InitCH340 {
      */
     private static void openCH340() {
         int ret_val = driver.ResumeUsbList();
-        InLog.d(TAG, ret_val + "");
+        LogUtils.d(TAG, ret_val + "");
         // ResumeUsbList方法用于枚举CH34X设备以及打开相关设备
         if (ret_val == -1) {
-            InLog.d(TAG, ret_val + "Failed to open device!");
+            LogUtils.d(TAG, ret_val + "Failed to open device!");
             driver.CloseDevice();
         } else if (ret_val == 0) {
             if (!driver.UartInit()) {  //对串口设备进行初始化操作
-                InLog.d(TAG, ret_val + "Failed device initialization!");
-                InLog.d(TAG, ret_val + "Failed to open device!");
+                LogUtils.d(TAG, ret_val + "Failed device initialization!");
+                LogUtils.d(TAG, ret_val + "Failed to open device!");
                 return;
             }
-            InLog.d(TAG, ret_val + "Open device successfully!");
+            LogUtils.d(TAG, ret_val + "Open device successfully!");
             if (!isOpenDeviceCH340) {
                 isOpenDeviceCH340 = true;
                 configParameters();//配置ch340的参数、需要先配置参数
             }
         } else {
-            InLog.d(TAG, "The phone couldn't find the device！");
+            LogUtils.d(TAG, "The phone couldn't find the device！");
         }
     }
 
@@ -124,13 +123,13 @@ public class InitCH340 {
     private static void configParameters() {
         boolean isSetConfig = driver.SetConfig(baudRate, dataBit, stopBit, parity, flowControl);
         if (isSetConfig) {
-            InLog.i(TAG, "Serial port Settings success~");
+            LogUtils.i(TAG, "Serial port Settings success~");
             if (readDataRunnable == null) {
                 readDataRunnable = new ReadDataRunnable();
             }
             mThreadPool.execute(readDataRunnable);
         } else {
-            InLog.e(TAG, "Serial port Settings failed！");
+            LogUtils.e(TAG, "Serial port Settings failed！");
         }
     }
 
