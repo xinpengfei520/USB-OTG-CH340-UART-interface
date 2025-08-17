@@ -9,7 +9,7 @@
 
 ## ⭐ Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=vancexin/USB-OTG-CH340-UART-interface&type=Date)](https://star-history.com/#vancexin/USB-OTG-CH340-UART-interface&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=xinpengfei520/USB-OTG-CH340-UART-interface&type=Date)](https://star-history.com/#xinpengfei520/USB-OTG-CH340-UART-interface&Date)
 
 ## 📖 项目简介
 
