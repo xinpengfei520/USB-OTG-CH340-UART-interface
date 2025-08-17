@@ -1,9 +1,9 @@
 # USB-OTG-CH340-UART-interface
 
-[![Version](https://img.shields.io/badge/version-1.0-blue.svg)](https://github.com/vancexin/USB-OTG-CH340-UART-interface)
+[![Version](https://img.shields.io/badge/version-1.0-blue.svg)](https://github.com/xinpengfei520/USB-OTG-CH340-UART-interface)
 [![API](https://img.shields.io/badge/API-19%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![GitHub stars](https://img.shields.io/github/stars/vancexin/USB-OTG-CH340-UART-interface.svg)](https://github.com/vancexin/USB-OTG-CH340-UART-interface/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/xinpengfei520/USB-OTG-CH340-UART-interface.svg)](https://github.com/xinpengfei520/USB-OTG-CH340-UART-interface/stargazers)
 
 一个用于Android设备通过USB OTG与CH340 UART转换器进行通信的库，无需root权限。
 
@@ -47,7 +47,7 @@ USB-OTG-CH340-UART-interface 是一个专为Android平台设计的USB转串口�
 
 1. **克隆项目**
 ```bash
-git clone https://github.com/vancexin/USB-OTG-CH340-UART-interface.git
+git clone https://github.com/xinpengfei520/USB-OTG-CH340-UART-interface.git
 ```
 
 2. **导入模块**
@@ -283,9 +283,9 @@ A: 请确认：
 ## 📞 联系方式
 
 - **作者**: x-sir
-- **邮箱**: [请在GitHub上联系](https://github.com/vancexin)
-- **项目地址**: https://github.com/vancexin/USB-OTG-CH340-UART-interface
-- **问题反馈**: [GitHub Issues](https://github.com/vancexin/USB-OTG-CH340-UART-interface/issues)
+- **邮箱**: [请在GitHub上联系](https://github.com/xinpengfei520)
+- **项目地址**: https://github.com/xinpengfei520/USB-OTG-CH340-UART-interface
+- **问题反馈**: [GitHub Issues](https://github.com/xinpengfei520/USB-OTG-CH340-UART-interface/issues)
 
 ## 🙏 致谢
 
